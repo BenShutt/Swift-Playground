@@ -7,6 +7,7 @@ public struct QuadraticFormula {
     public var c: Double
 
     public init(a: Double, b: Double, c: Double) {
+        assert(a != 0)
         self.a = a
         self.b = b
         self.c = c
@@ -36,9 +37,11 @@ public struct QuadraticFormula {
     }
 
     public func solutions() -> [Number] {
-        assert(a != 0)
-        if discriminant == 0 { return [.real(first)] }
-        return [make(sign: 1), make(sign: -1)]
+        if doubleEqual(discriminant, 0) {
+            [.real(first)]
+        } else {
+            [make(sign: 1), make(sign: -1)]
+        }
     }
 
     public func printSolutions() {
@@ -53,8 +56,14 @@ public struct QuadraticFormula {
         solutions()
             .compactMap {
                 guard case .real(let real) = $0 else { return nil }
-                return  real
+                return real
             }
             .max()
     }
+}
+
+// MARK: - Double + Extensions
+
+private func doubleEqual(_ a: Double, _ b: Double) -> Bool {
+    return fabs(a - b) < Double.ulpOfOne
 }

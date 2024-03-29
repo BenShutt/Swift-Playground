@@ -9,7 +9,7 @@ print("5b - Force", value: force, unit: "N")
 // 6b
 let nBricks = (150 / g - 5) / 2.3
 print("6b - NBricks", value: nBricks)
-print("6b - Max NBricks \(Int(nBricks))")
+print("6b - Max NBricks", number: Int(nBricks))
 
 // 7b
 let t = QuadraticFormula(a: -2 * g, b: 7, c: 5).maxReal()!
