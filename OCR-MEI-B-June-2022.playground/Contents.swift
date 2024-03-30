@@ -7,10 +7,10 @@ private func f(x: Radians) -> Vector2d {
         y: 3 * sin(x) * cos(x)
     )
 }
-print("Point 1", number: f(x: -.pi / 2), unit: "")
-print("Point 2", number: f(x: .pi / 2), unit: "")
-print("Point 3", number: f(x: atan(1 / 3)), unit: "")
-print("Point 4", number: f(x: atan(1 / 3) - .pi), unit: "")
+print("Point 1", number: f(x: -.pi / 2))
+print("Point 2", number: f(x: .pi / 2))
+print("Point 3", number: f(x: atan(1 / 3)))
+print("Point 4", number: f(x: atan(1 / 3) - .pi))
 
 printQuestion("5b")
 let tension = 3 * g / cos(radians(25))
