@@ -1,7 +1,7 @@
 import Foundation
 
 printQuestion("3b", newLine: false)
-private func f(x: Radians) -> Vector2d { // x is in radians
+private func f(x: Radians) -> Vector2d {
     Vector2d(
         x: x,
         y: 3 * sin(x) * cos(x)
