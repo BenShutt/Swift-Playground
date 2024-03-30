@@ -1,7 +1,6 @@
 import Foundation
 
 public struct QuadraticFormula {
-
     public var a: Double
     public var b: Double
     public var c: Double
@@ -25,9 +24,9 @@ public struct QuadraticFormula {
         sqrt(abs(discriminant)) / (2 * a)
     }
 
-    private func make(sign: Double) -> Number {
+    private func solution(sign: Double, discriminant: Double) -> Number {
         if discriminant > 0 {
-            .real(first + second(discriminant: discriminant))
+            .real(first + sign * second(discriminant: discriminant))
         } else {
             .complex(
                 real: first,
@@ -37,11 +36,12 @@ public struct QuadraticFormula {
     }
 
     public func solutions() -> [Number] {
-        if doubleEqual(discriminant, 0) {
-            [.real(first)]
-        } else {
-            [make(sign: 1), make(sign: -1)]
-        }
+        let discriminant = discriminant
+        guard !doubleEqual(discriminant, 0) else { return [.real(first)] }
+        return [
+            solution(sign: 1, discriminant: discriminant),
+            solution(sign: -1, discriminant: discriminant)
+        ]
     }
 
     public func printSolutions() {
@@ -60,10 +60,4 @@ public struct QuadraticFormula {
             }
             .max()
     }
-}
-
-// MARK: - Double + Extensions
-
-private func doubleEqual(_ a: Double, _ b: Double) -> Bool {
-    return fabs(a - b) < Double.ulpOfOne
 }

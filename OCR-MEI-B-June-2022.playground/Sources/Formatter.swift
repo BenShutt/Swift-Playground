@@ -23,8 +23,16 @@ public struct Formatter {
 
     public func format(_ value: Double) -> String {
         let string = numberFormatter.string(from: value as NSNumber)
-        if let string { return string }
+        if let string { return mapNegativeZero(string: string) }
         let format = "%.\(numberFormatter.maximumFractionDigits)f"
         return String(format: format, value)
+    }
+
+    /// Prevent printing `-0`. Map to printing `0`.
+    /// - Parameter string: The formatted string
+    /// - Returns: Mapped string, if required
+    private func mapNegativeZero(string: String) -> String {
+        guard string == numberFormatter.string(from: -0.0) else { return string }
+        return numberFormatter.string(from: 0) ?? string
     }
 }

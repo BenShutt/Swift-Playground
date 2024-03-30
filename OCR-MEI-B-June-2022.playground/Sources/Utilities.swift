@@ -1,5 +1,7 @@
 import Foundation
 
+public typealias Radians = Double
+
 public let g = 9.80665 // m/s²
 
 public func radians(_ degrees: Double) -> Double {
@@ -11,6 +13,10 @@ public func format(
     plusSign: Bool = false
 ) -> String {
     Formatter(plusSign: plusSign).format(value)
+}
+
+public func doubleEqual(_ a: Double, _ b: Double) -> Bool {
+    return fabs(a - b) < Double.ulpOfOne
 }
 
 public func print(
@@ -27,4 +33,8 @@ public func print(
     unit: String = ""
 ) {
     print("\(name): \(number)\(unit)")
+}
+
+public func printQuestion(_ name: String, newLine: Bool = true) {
+    print("\(newLine ? "\n" : "")Q) \(name)")
 }
