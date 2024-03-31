@@ -3,10 +3,11 @@ import Foundation
 public typealias Degrees = Double
 public typealias Radians = Double
 
+public let π: Double = .pi
 public let g = 9.80665 // m/s²
 
 public func radians(_ degrees: Degrees) -> Radians {
-    degrees / 180 * Double.pi
+    degrees / 180 * π
 }
 
 public func format(
