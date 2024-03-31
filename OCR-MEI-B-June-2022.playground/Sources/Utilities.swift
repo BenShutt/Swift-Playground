@@ -1,10 +1,11 @@
 import Foundation
 
+public typealias Degrees = Double
 public typealias Radians = Double
 
 public let g = 9.80665 // m/s²
 
-public func radians(_ degrees: Double) -> Double {
+public func radians(_ degrees: Degrees) -> Radians {
     degrees / 180 * Double.pi
 }
 
@@ -16,7 +17,7 @@ public func format(
 }
 
 public func doubleEqual(_ a: Double, _ b: Double) -> Bool {
-    return fabs(a - b) < Double.ulpOfOne
+    fabs(a - b) < .ulpOfOne
 }
 
 public func print(
