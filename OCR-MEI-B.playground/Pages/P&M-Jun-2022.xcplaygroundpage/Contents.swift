@@ -1,6 +1,7 @@
 import Foundation
+printExam("P&M-Jun-2022")
 
-printQuestion("3b", newLine: false)
+printQuestion("3b")
 private func f(x: Radians) -> Vector2d {
     Vector2d(
         x: x,
