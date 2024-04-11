@@ -20,11 +20,11 @@ public func degrees(_ radians: Radians) -> Degrees {
 
 // MARK: - Statistics
 
-/// `C(n, r)` combination function, `n` choose `r`.
+/// `C(n, r)` combination function. AKA `n` choose `r`.
 /// - Parameters:
-///   - n: Number of elements
-///   - r: Number of combinations
-/// - Returns: Function value, returns a `Double` due to max `Int` size
+///   - n: (Natural) number of elements
+///   - r: (Natural) number of combinations
+/// - Returns: Function value, returns a `Double` due to `Int` overflow
 public func combination(n: Int, r: Int) -> Double {
     precondition(n >= r)
     let numerator = factorial(n: n)
@@ -34,18 +34,18 @@ public func combination(n: Int, r: Int) -> Double {
 
 /// Factional function.
 /// `n! = n * (n - 1) * ... * 2 * 1`
-/// - Parameter n: A given natural number or 0
+/// - Parameter n: (Natural) number
 /// - Returns: Function value, returns a `Double` due to max `Int` size
 public func factorial(n: Int) -> Double {
-    precondition(n >= 0)
+    precondition(n >= 1)
     return (1...n).map(Double.init).reduce(1.0, *)
 }
 
 /// The binomial distribution function
 /// `p(X = r) = C(n, r) * p^r * p^(n - r)`
 /// - Parameters:
-///   - n: Number of trails - natural number
-///   - r: Number of successful trails
+///   - n: (Natural) number of trails
+///   - r: (Natural) number of successful trails
 ///   - p: Probability of success of a single trial
 /// - Returns: The binomial distribution function value
 public func binomial(n: Int, r: Int, p: Double) -> Double {
@@ -54,6 +54,20 @@ public func binomial(n: Int, r: Int, p: Double) -> Double {
     let powerP = pow(p, Double(r))
     let powerQ = pow(1 - p, Double(n - r))
     return combination * powerP * powerQ
+}
+
+/// Sum the binomial distribution functions from `1` to `r`
+/// `p(X ≤ r) = ∑p(X = i)` where `1 ≤ i ≤ r`
+/// - Parameters:
+///   - n: (Natural) number of trails
+///   - r: (Natural) number of successful trails
+///   - p: Probability of success of a single trial
+/// - Returns: The sum of the binomial distribution function values
+public func binomialSum(n: Int, r: Int, p: Double) -> Double {
+    precondition(r >= 1)
+    return (1...r).reduce(0) { sum, i in
+        sum + binomial(n: n, r: i, p: p)
+    }
 }
 
 // MARK: - Double
