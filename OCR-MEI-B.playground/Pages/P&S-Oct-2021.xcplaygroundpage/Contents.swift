@@ -59,6 +59,11 @@ numerator = 3.0 * 2 * 2 * 1
 let case2 = 12 * numerator / denominator
 print("P(3F|≥3B)", value: (case1 + case2) / atLeast3Black)
 
+printQuestion("11c")
+let z = (161.9 - 161.6) / (1.96 / sqrt(200))
+let xBar = 1.645 * sqrt(1.96 / 200) + 161.6
+print("xBar", value: xBar)
+
 printQuestion("12f")
 let waist = 2.16 * 24.9 + 33
 print("Waist", value: waist)
@@ -93,3 +98,9 @@ print("p(X = 4)", value: four)
 var five = binomialSum(n: n, r: 10, p: p)
 five -= binomialSum(n: n, r: 4, p: p)
 print("p(X ≥ 5)", value: five * count)
+
+printQuestion("15a")
+let sum = (1...312).reduce(0) { sum, r in
+    sum + pow(0.99, Double(r) - 1) * 0.01
+}
+print("p(X = r)", value: sum)
