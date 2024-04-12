@@ -22,8 +22,8 @@ public func degrees(_ radians: Radians) -> Degrees {
 
 /// `C(n, r)` combination function. AKA `n` choose `r`.
 /// - Parameters:
-///   - n: (Natural) number of elements
-///   - r: (Natural) number of combinations
+///   - n: (Natural) number of elements or 0
+///   - r: (Natural) number of combinations or 0
 /// - Returns: Function value, returns a `Double` due to `Int` overflow
 public func combination(n: Int, r: Int) -> Double {
     precondition(n >= r)
@@ -34,18 +34,19 @@ public func combination(n: Int, r: Int) -> Double {
 
 /// Factional function.
 /// `n! = n * (n - 1) * ... * 2 * 1`
-/// - Parameter n: (Natural) number
+/// - Parameter n: (Natural) number or 0
 /// - Returns: Function value, returns a `Double` due to max `Int` size
 public func factorial(n: Int) -> Double {
-    precondition(n >= 1)
-    return (1...n).map(Double.init).reduce(1.0, *)
+    precondition(n >= 0)
+    guard n > 0 else { return 1 }
+    return (1...n).map(Double.init).reduce(1, *)
 }
 
 /// The binomial distribution function
 /// `p(X = r) = C(n, r) * p^r * p^(n - r)`
 /// - Parameters:
-///   - n: (Natural) number of trails
-///   - r: (Natural) number of successful trails
+///   - n: (Natural) number of trials or 0
+///   - r: (Natural) number of successful trials or 0
 ///   - p: Probability of success of a single trial
 /// - Returns: The binomial distribution function value
 public func binomial(n: Int, r: Int, p: Double) -> Double {
@@ -59,13 +60,13 @@ public func binomial(n: Int, r: Int, p: Double) -> Double {
 /// Sum the binomial distribution functions from `1` to `r`
 /// `p(X ≤ r) = ∑p(X = i)` where `1 ≤ i ≤ r`
 /// - Parameters:
-///   - n: (Natural) number of trails
-///   - r: (Natural) number of successful trails
+///   - n: (Natural) number of trials or 0
+///   - r: (Natural) number of successful trials or 0
 ///   - p: Probability of success of a single trial
 /// - Returns: The sum of the binomial distribution function values
 public func binomialSum(n: Int, r: Int, p: Double) -> Double {
-    precondition(r >= 1)
-    return (1...r).reduce(0) { sum, i in
+    precondition(r >= 0)
+    return (0...r).reduce(0) { sum, i in
         sum + binomial(n: n, r: i, p: p)
     }
 }
