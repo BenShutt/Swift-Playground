@@ -81,9 +81,13 @@ public func doubleEqual(_ a: Double, _ b: Double) -> Bool {
 
 public func format(
     _ value: Double,
+    maximumFractionDigits: Int = .defaultMaximumFractionDigits,
     plusSign: Bool = false
 ) -> String {
-    Formatter(plusSign: plusSign).format(value)
+    Formatter(
+        maximumFractionDigits: maximumFractionDigits,
+        plusSign: plusSign
+    ).format(value)
 }
 
 public func printExam(_ name: String) {

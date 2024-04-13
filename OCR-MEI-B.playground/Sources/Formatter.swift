@@ -12,7 +12,7 @@ public struct Formatter {
     }()
 
     public init(
-        maximumFractionDigits: Int = 3,
+        maximumFractionDigits: Int = .defaultMaximumFractionDigits,
         plusSign: Bool = false
     ) {
         numberFormatter.maximumFractionDigits = maximumFractionDigits
@@ -35,4 +35,10 @@ public struct Formatter {
         guard string == numberFormatter.string(from: -0.0) else { return string }
         return numberFormatter.string(from: 0) ?? string
     }
+}
+
+// MARK: - Int + Extensions
+
+public extension Int {
+    static let defaultMaximumFractionDigits = 3
 }
