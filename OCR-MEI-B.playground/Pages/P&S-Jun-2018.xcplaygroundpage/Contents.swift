@@ -75,3 +75,11 @@ print("Probability over 5 days", number: output)
 
 printQuestion("11iii")
 print("E(0)", value: probability(x: 0) * 40)
+
+printQuestion("16ii")
+let mark = 62 - 250.0 / 16
+print("Mark", value: mark)
+
+printQuestion("16iii")
+let maxTime = sqrt(6.2) + 2
+print("Max Time", value: maxTime)
