@@ -4,17 +4,17 @@ import CryptoKit
 /// AES-GCM encryption using CryptoKit
 struct AESEncryption {
 
-    /// A Base64 encoded string
+    /// A Base64 encoded string of a byte sequence
     typealias Base64String = String
 
-    /// The secret symmetric key to use for encryption and decryption
+    /// The secret symmetric key to use for encryption and decryption.
     /// Defaults to a new 256 bit key
     var key = SymmetricKey(size: .bits256)
 
     /// Base64 encoded string representation of the key
-    var stringKey: Base64String {
-        key.withUnsafeBytes {
-            Data(Array($0)).base64EncodedString()
+    var base64EncodedKey: Base64String {
+        key.withUnsafeBytes { bytes in
+            Data(Array(bytes)).base64EncodedString()
         }
     }
 
@@ -50,14 +50,11 @@ struct AESEncryption {
     }
 
     /// Decrypt the given Base64 encoded string representation of encrypted data
-    /// - Parameter string: Base64 encoded string to decrypt
+    /// - Parameter base64EncodedString: Base64 encoded string to decrypt
     /// - Returns: Decrypted data mapped (back) to a string
-    func decrypt(base64Encoded string: Base64String) throws -> String {
-        guard let data = Data(base64Encoded: string) else {
-            throw AESEncryptionError.base64
-        }
-        return try String(
-            decoding: decrypt(data: data),
+    func decrypt(base64EncodedString: Base64String) throws -> String {
+        try String(
+            decoding: decrypt(data: base64EncodedString.data),
             as: UTF8.self
         )
     }
@@ -69,11 +66,24 @@ extension AESEncryption {
     
     /// Initialize with a 256 bit Base64 encoded string
     /// - Parameter key: Base64 encoded string representation of the 256 bit key
-    init(key: Base64String) throws {
-        guard let data = Data(base64Encoded: key) else {
-            throw AESEncryptionError.base64
+    init(base64EncodedKey: Base64String) throws {
+        key = try SymmetricKey(data: base64EncodedKey.data)
+    }
+}
+
+// MARK: - AESEncryption.Base64String + Extensions
+
+private extension AESEncryption.Base64String {
+
+    /// Map a Base64 encoded string to data
+    var data: Data {
+        get throws {
+            if let data = Data(base64Encoded: self) {
+                data
+            } else {
+                throw AESEncryptionError.base64
+            }
         }
-        self.key = SymmetricKey(data: data)
     }
 }
 
@@ -82,11 +92,11 @@ extension AESEncryption {
 /// An `Error` that may be thrown in `AESEncryption`
 enum AESEncryptionError: Error {
 
-    /// Data from Base64 encoded String was `nil`
-    case base64
-
-    /// After encrypting, combined was `nil`
+    /// Error thrown after encrypting when combined is `nil`
     case combined
+
+    /// Error thrown if the data from a Base64 encoded String is `nil`
+    case base64
 }
 
 // MARK: - Main
@@ -99,20 +109,24 @@ defer {
 }
 
 do {
-    // Make a new secret key
-    let aes = AESEncryption()
-    print("AES encryption key \(aes.stringKey)")
+    // Make an AESEncryption instance with a new secret key
+    var aes = AESEncryption()
+    print("AES encryption key \(aes.base64EncodedKey)")
 
-    // Encrypt and decrypt the data
+    // Encrypt and decrypt the sample data
     let value = "Some sensitive data that should be encrypted"
     let encrypted = try aes.encrypt(string: value)
-    let decrypted = try aes.decrypt(base64Encoded: encrypted)
+    let decrypted = try aes.decrypt(base64EncodedString: encrypted)
 
     // Check the output matches the input
-    let valueMatches = value == decrypted
-    print("Success: \(valueMatches)")
+    print("Encryption success: \(value == decrypted)")
+
+    // Test a pre-defined key
+    let key = "AJULtMh8ryb3gWEvOjbhYYOqcFJw3TYODnR4pZZhMMM="
+    aes = try AESEncryption(base64EncodedKey: key)
+    print("Key success: \(aes.base64EncodedKey == key)")
 } catch {
-    print(error)
+    print("Error: \(error)")
 }
 
 // References:
