@@ -104,8 +104,7 @@ enum AESEncryptionError: Error {
 // Log the duration of the encryption and decryption
 let startDate = Date()
 defer {
-    let endDate = Date()
-    print("Elapsed time \(endDate.timeIntervalSince(startDate))s")
+    printElapsed(since: startDate)
 }
 
 do {
