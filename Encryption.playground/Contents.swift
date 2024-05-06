@@ -92,7 +92,7 @@ private extension AESEncryption.Base64String {
 /// An `Error` that may be thrown in `AESEncryption`
 enum AESEncryptionError: Error {
 
-    /// Error thrown after encrypting when combined is `nil`
+    /// Error thrown if the combined after encrypting is `nil`
     case combined
 
     /// Error thrown if the data from a Base64 encoded String is `nil`
