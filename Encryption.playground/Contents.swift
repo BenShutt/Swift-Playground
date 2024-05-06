@@ -82,10 +82,10 @@ extension AESEncryption {
 /// An `Error` that may be thrown in `AESEncryption`
 enum AESEncryptionError: Error {
 
-    /// Failed to get get from Base64 encoded String
+    /// Data from Base64 encoded String was `nil`
     case base64
 
-    /// Combined was `nil` after encrypting
+    /// After encrypting, combined was `nil`
     case combined
 }
 
