@@ -37,8 +37,7 @@ struct Trimmed<Value: Trimmable & Decodable>: Decodable {
     }
 
     init(from decoder: any Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        try self.init(wrappedValue: container.decode(Value.self))
+        try self.init(wrappedValue: Value(from: decoder))
     }
 }
 
