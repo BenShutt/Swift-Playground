@@ -2,26 +2,25 @@ import Foundation
 
 // MARK: - Trimmable
 
-public protocol Trimmable {
-    init(untrimmed: Self)
+protocol Trimmable {
+    func trim() -> Self
 }
 
 // MARK: - String + Trimmable
 
 extension String: Trimmable {
-    public init(untrimmed: Self) {
-        self = untrimmed.trimmingCharacters(in: .whitespacesAndNewlines)
+    func trim() -> Self {
+        trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
 
 // MARK: - String? + Trimmable
 
 extension Optional: Trimmable where Wrapped: Trimmable {
-    public init(untrimmed: Self) {
-        if let untrimmed {
-            self = .some(.init(untrimmed: untrimmed))
-        } else {
-            self = .none
+    func trim() -> Self {
+        switch self {
+        case let .some(wrapped): wrapped.trim()
+        case .none: nil
         }
     }
 }
@@ -33,11 +32,12 @@ struct Trimmed<Value: Trimmable & Decodable>: Decodable {
     let wrappedValue: Value
 
     init(wrappedValue: Value) {
-        self.wrappedValue = .init(untrimmed: wrappedValue)
+        self.wrappedValue = wrappedValue.trim()
     }
 
     init(from decoder: any Decoder) throws {
-        try self.init(wrappedValue: Value(from: decoder))
+        let value = try Value(from: decoder)
+        self.init(wrappedValue: value)
     }
 }
 
