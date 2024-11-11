@@ -36,9 +36,6 @@ struct CustomerSetup {
     }
 
     func load() async throws -> Customer {
-        print("Begin loading \(Self.self)")
-        defer { print("End loading \(Self.self)") }
-
         try await Task.sleep(for: .seconds(3)) // Expensive task
         return Customer(customerId: "123")
     }
@@ -54,9 +51,6 @@ struct AnalyticsSetup {
     }
 
     func load() async throws {
-        print("Begin loading \(Self.self)")
-        defer { print("End loading \(Self.self)") }
-
         let customer = try await customer.get() // Use customer
         try await Task.sleep(for: .seconds(3)) // Expensive task
     }
@@ -67,8 +61,6 @@ struct AnalyticsSetup {
 /// This task will not be called upon in main so should be ignored
 struct IgnoredSetup {
     func load() async throws {
-        print("Begin loading \(Self.self)")
-        defer { print("End loading \(Self.self)") }
         try await Task.sleep(for: .seconds(3)) // Expensive task
     }
 }
@@ -87,9 +79,6 @@ struct ReportSetup {
     }
 
     func load() async throws -> Report {
-        print("Begin loading \(Self.self)")
-        defer { print("End loading \(Self.self)") }
-
         let customer = try await customer.get() // Use customer
         try await Task.sleep(for: .seconds(3)) // Expensive task
         return Report(isComplete: true)
@@ -108,9 +97,17 @@ extension AnalyticsSetup: Loadable {}
 extension IgnoredSetup: Loadable {}
 extension ReportSetup: Loadable {}
 
+extension Loadable {
+    func loadAndPrint() async throws -> Output {
+        print("Begin loading \(Self.self)")
+        defer { print("End loading \(Self.self)") }
+        return try await load()
+    }
+}
+
 extension LazyTask {
     init<T: Loadable>(_ loadable: T) where T.Output == Output {
-        self.init(operation: loadable.load)
+        self.init(operation: loadable.loadAndPrint)
     }
 }
 
@@ -149,14 +146,14 @@ struct TaskPublisher<Output: Sendable>: Publisher, Sendable {
     }
 }
 
-// MARK: - TaskSubscription
+// MARK: - TaskPublisher.TaskSubscription
 
 extension TaskPublisher {
 
     /// A Subscription that runs an asynchronous operation when initialized
     final class TaskSubscription<S: Subscriber>: Subscription where S.Input == Output, S.Failure == Failure, S: Sendable {
         private var subscriber: S?
-        private let task: Task<Void, Error>
+        private var task: Task<Void, Error>?
 
         init(subscriber: S, operation: @escaping Operation) {
             self.subscriber = subscriber
@@ -175,8 +172,9 @@ extension TaskPublisher {
         func request(_ demand: Subscribers.Demand) {}
 
         func cancel() {
+            task?.cancel()
+            task = nil
             subscriber = nil
-            task.cancel()
         }
     }
 }
