@@ -41,7 +41,7 @@ final class Atomic<Stored: Sendable>: @unchecked Sendable {
 
 // Check initializer
 let first = UUID()
-let lock = Atomic<UUID>(storing: first)
+let lock = Atomic<UUID>(wrappedValue: first)
 assert(lock.wrappedValue == first)
 
 // Check set
