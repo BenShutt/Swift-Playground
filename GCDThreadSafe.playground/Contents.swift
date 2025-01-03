@@ -2,11 +2,11 @@ import Foundation
 
 /// Example of making a thread safe class using GCD
 @propertyWrapper
-final class ThreadSafe<Stored: Sendable>: @unchecked Sendable {
+final class Atomic<Stored: Sendable>: @unchecked Sendable {
 
     /// Concurrent dispatch queue
     private let queue = DispatchQueue(
-        label: "\(ThreadSafe.self)",
+        label: "\(Atomic.self)",
         attributes: .concurrent
     )
 
@@ -14,9 +14,9 @@ final class ThreadSafe<Stored: Sendable>: @unchecked Sendable {
     private var storedValue: Stored
     
     /// Memberwise initializer
-    /// - Parameter storedValue: The value to store
-    init(storing storedValue: Stored) {
-        self.storedValue = storedValue
+    /// - Parameter wrappedValue: The value to store
+    init(wrappedValue: Stored) {
+        storedValue = wrappedValue
     }
 
     /// Get and set the stored value in a thread safe manner
@@ -41,7 +41,7 @@ final class ThreadSafe<Stored: Sendable>: @unchecked Sendable {
 
 // Check initializer
 let first = UUID()
-let lock = ThreadSafe<UUID>(storing: first)
+let lock = Atomic<UUID>(storing: first)
 assert(lock.wrappedValue == first)
 
 // Check set
