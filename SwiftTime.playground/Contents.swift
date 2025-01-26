@@ -31,7 +31,6 @@ func mapDouble(_ numbers: [Int]) -> [Int] {
 // MARK: - Helper
 
 func test(
-    _ numbers: [Int],
     operation: ([Int]) -> [Int],
     name: String
 ) {
@@ -55,6 +54,6 @@ extension ContinuousClock.Duration {
 // MARK: - Main
 
 try await Task.sleep(for: .seconds(1))
-test(numbers, operation: forDouble, name: "forDouble")
-test(numbers, operation: forEnumeratedDouble, name: "forEnumeratedDouble")
-test(numbers, operation: mapDouble, name: "mapDouble")
+test(operation: forDouble, name: "forDouble")
+test(operation: forEnumeratedDouble, name: "forEnumeratedDouble")
+test(operation: mapDouble, name: "mapDouble")
