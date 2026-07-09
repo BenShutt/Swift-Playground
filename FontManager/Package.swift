@@ -8,13 +8,15 @@ let package = Package(
     platforms: [
         .macOS(.v10_12),
         .iOS(.v11),
-        //.tvOS(.v10),
-        //.watchOS(.v3)
     ],
     products: [
         .library(
             name: "FontManager",
             targets: ["FontManager"]
+        ),
+        .executable(
+            name: "FontManagerApp",
+            targets: ["FontManagerApp"]
         ),
     ],
     dependencies: [
@@ -24,9 +26,10 @@ let package = Package(
             name: "FontManager",
             path: "Sources"
         ),
-        .testTarget(
-            name: "FontManagerTests",
-            dependencies: ["FontManager"]
+        .target(
+            name: "FontManagerApp",
+            dependencies: ["FontManager"],
+            path: "FontManagerApp/Sources"
         ),
     ],
     swiftLanguageVersions: [.v5]

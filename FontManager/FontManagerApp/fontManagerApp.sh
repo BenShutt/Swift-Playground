@@ -1,5 +1,9 @@
 #!/bin/bash -e
 
+# Now works using SwiftPM executable, kept for archive
+echo "No longer supported (See CLONE_URL)" 1>&2
+exit 1
+
 # Usage description if invalid arguments provided
 usage() { echo "Usage: $ [-p <font directory path>]" 1>&2; exit 1; }
 
@@ -7,7 +11,7 @@ usage() { echo "Usage: $ [-p <font directory path>]" 1>&2; exit 1; }
 EXTENSION=ttf
 
 # URL to clone
-CLONE_URL=https://github.com/BenCShutt/FontManager.git
+CLONE_URL="<deleted>"
 
 # Name of the app to run
 APP_NAME=FontManagerApp
