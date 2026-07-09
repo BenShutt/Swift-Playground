@@ -1,11 +1,22 @@
 timeline.xctimeline
 playground.xcworkspace
-.DS_Store
 
-/.build
+# --- General ---
+.build/
+.swiftpm/
+
+# --- SwiftPM ---
+.DS_Store
+# /.build
 /Packages
 xcuserdata/
 DerivedData/
 .swiftpm/configuration/registries.json
 .swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
 .netrc
+
+# --- VSCode ---
+.vscode/launch.json
+
+# --- Vim ---
+*.swp

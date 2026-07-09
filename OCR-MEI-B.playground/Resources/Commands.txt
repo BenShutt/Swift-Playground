@@ -1,5 +1,0 @@
-Clear Console
-Command + K
-
-Run Playground
-Command + Shift + Enter
