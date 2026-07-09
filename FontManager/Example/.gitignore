@@ -1,14 +1,6 @@
 
-# Created by https://www.gitignore.io/api/xcode,swift,cocoapods,objective-c,swiftpackagemanager
-# Edit at https://www.gitignore.io/?templates=xcode,swift,cocoapods,objective-c,swiftpackagemanager
-
-### CocoaPods ###
-## CocoaPods GitIgnore Template
-
-# CocoaPods - Only use to conserve bandwidth / Save time on Pushing
-#           - Also handy if you have a large number of dependant pods
-#           - AS PER https://guides.cocoapods.org/using/using-cocoapods.html NEVER IGNORE THE LOCK FILE
-Pods/
+# Created by https://www.gitignore.io/api/xcode,swift,objective-c,swiftpackagemanager
+# Edit at https://www.gitignore.io/?templates=xcode,swift,objective-c,swiftpackagemanager
 
 ### Objective-C ###
 # Xcode
@@ -41,19 +33,6 @@ xcuserdata/
 *.dSYM.zip
 *.dSYM
 
-# CocoaPods
-# We recommend against adding the Pods directory to your .gitignore. However
-# you should judge for yourself, the pros and cons are mentioned at:
-# https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
-# Pods/
-# Add this line if you want to avoid checking in source code from the Xcode workspace
-# *.xcworkspace
-
-# Carthage
-# Add this line if you want to avoid checking in source code from Carthage dependencies.
-# Carthage/Checkouts
-
-Carthage/Build
 
 # fastlane
 # It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
@@ -79,9 +58,6 @@ iOSInjectionProject/
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
 
-
-
-
 ## Playgrounds
 timeline.xctimeline
 playground.xcworkspace
@@ -94,18 +70,6 @@ playground.xcworkspace
 .build/
 # Add this line if you want to avoid checking in Xcode SPM integration.
 # .swiftpm/xcode
-
-# CocoaPods
-# We recommend against adding the Pods directory to your .gitignore. However
-# you should judge for yourself, the pros and cons are mentioned at:
-# https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
-# Pods/
-# Add this line if you want to avoid checking in source code from the Xcode workspace
-# *.xcworkspace
-
-# Carthage
-# Add this line if you want to avoid checking in source code from Carthage dependencies.
-# Carthage/Checkouts
 
 
 # Accio dependency management
@@ -150,4 +114,4 @@ xcuserdata
 ### Xcode Patch ###
 **/xcshareddata/WorkspaceSettings.xcsettings
 
-# End of https://www.gitignore.io/api/xcode,swift,cocoapods,objective-c,swiftpackagemanager
+# End of https://www.gitignore.io/api/xcode,swift,objective-c,swiftpackagemanager
