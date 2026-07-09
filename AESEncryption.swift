@@ -63,7 +63,7 @@ struct AESEncryption {
 // MARK: - AESEncryption + Init
 
 extension AESEncryption {
-    
+
     /// Initialize with a 256 bit Base64 encoded string
     /// - Parameter key: Base64 encoded string representation of the 256 bit key
     init(base64EncodedKey: Base64String) throws {
@@ -97,6 +97,15 @@ enum AESEncryptionError: Error {
 
     /// Error thrown if the data from a Base64 encoded String is `nil`
     case base64
+}
+
+// MARK: - Utilities
+
+func printElapsed(since startDate: Date) {
+    let endDate = Date()
+    let elapsedSeconds = endDate.timeIntervalSince(startDate)
+    let formattedSeconds = String(format: "%.3f", elapsedSeconds)
+    print("Elapsed time \(formattedSeconds)s")
 }
 
 // MARK: - Main
