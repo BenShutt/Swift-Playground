@@ -1,5 +1,6 @@
 import Combine
-import PlaygroundSupport
+
+// TODO: @Sendable
 
 // MARK: - LazyTask
 
@@ -118,10 +119,10 @@ struct StartupManager {
     static let shared = StartupManager()
     private init() {}
 
-    let customer = LazyTask(CustomerSetup())
-    let analytics = LazyTask(AnalyticsSetup())
-    let ignored = LazyTask(IgnoredSetup())
-    let report = LazyTask(ReportSetup())
+    let _ = LazyTask(CustomerSetup())
+    let _ = LazyTask(AnalyticsSetup())
+    let _ = LazyTask(IgnoredSetup())
+    let _ = LazyTask(ReportSetup())
 }
 
 // MARK: - TaskPublisher
@@ -206,12 +207,6 @@ func observe<T>(
 }
 
 // MARK: - Main
-
-// Setup Playground for concurrency
-PlaygroundPage.current.needsIndefiniteExecution = true
-defer {
-    PlaygroundPage.current.finishExecution()
-}
 
 // Create Set of Combine cancellables
 var cancellables = Set<AnyCancellable>()
