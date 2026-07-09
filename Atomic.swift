@@ -12,7 +12,7 @@ final class Atomic<Stored: Sendable>: @unchecked Sendable {
 
     /// A property that is thread safe and accessed only on the queue
     private var storedValue: Stored
-    
+
     /// Memberwise initializer
     /// - Parameter wrappedValue: The value to store
     init(wrappedValue: Stored) {
