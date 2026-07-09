@@ -52,7 +52,7 @@ struct AnalyticsSetup {
     }
 
     func load() async throws {
-        let customer = try await customer.get() // Use customer
+        _ = try await customer.get()
         try await Task.sleep(for: .seconds(3)) // Expensive task
     }
 }
@@ -80,7 +80,7 @@ struct ReportSetup {
     }
 
     func load() async throws -> Report {
-        let customer = try await customer.get() // Use customer
+        _ = try await customer.get()
         try await Task.sleep(for: .seconds(3)) // Expensive task
         return Report(isComplete: true)
     }
@@ -119,10 +119,10 @@ struct StartupManager {
     static let shared = StartupManager()
     private init() {}
 
-    let _ = LazyTask(CustomerSetup())
-    let _ = LazyTask(AnalyticsSetup())
-    let _ = LazyTask(IgnoredSetup())
-    let _ = LazyTask(ReportSetup())
+    let customer = LazyTask(CustomerSetup())
+    let analytics = LazyTask(AnalyticsSetup())
+    let ignored = LazyTask(IgnoredSetup())
+    let report = LazyTask(ReportSetup())
 }
 
 // MARK: - TaskPublisher
