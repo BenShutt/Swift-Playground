@@ -1,0 +1,17 @@
+# Version should match Mintfile
+sourceryCommand: mint run krzysztofzablocki/Sourcery@2.2.6 sourcery
+# URL Should match update-mock-template.sh script
+sourceryTemplate: ./Tests/Mocks/Mock.swifttemplate
+
+unit.tests.mock:
+  sources:
+    include:
+      - ./Sources
+  output:
+    ./Tests/Mocks/Mock.generated.swift
+  targets:
+    - SwiftyMockyExampleTests
+  testable:
+    - SwiftyMockyExample
+  import:
+    - Foundation
