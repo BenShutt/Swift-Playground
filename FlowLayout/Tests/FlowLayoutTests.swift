@@ -2,6 +2,7 @@ import SwiftUI
 import XCTest
 @testable import FlowLayout
 
+@MainActor
 final class FlowLayoutTests: XCTestCase {
     private let collectionViewSize = CGSize(width: 100, height: 500)
     private let padding = EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
