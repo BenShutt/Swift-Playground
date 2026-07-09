@@ -15,7 +15,7 @@ struct ButtonView: View {
 
     var body: some View {
         Button(action: action) {
-            Text(title)
+            Text(title, bundle: .module)
                 .title()
                 .foregroundStyle(foregroundColor)
                 .frame(maxWidth: .infinity)

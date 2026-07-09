@@ -48,7 +48,7 @@ private struct HeightView: View {
 
     var body: some View {
         VStack(spacing: .small) {
-            Text("cell_title")
+            Text("cell_title", bundle: .module)
                 .body()
                 .scaledSingleLine()
                 .foregroundStyle(Color.appDarkGray)

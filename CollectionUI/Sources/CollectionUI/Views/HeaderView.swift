@@ -49,7 +49,7 @@ struct HeaderView: View {
     }
 
     var body: some View {
-        Text("\(index) columns")
+        Text("\(index) columns", bundle: .module)
             .header()
             .foregroundStyle(foregroundColor)
             .padding(.medium)

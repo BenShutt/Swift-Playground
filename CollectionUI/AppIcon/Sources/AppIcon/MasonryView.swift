@@ -7,48 +7,20 @@
 
 import SwiftUI
 
-/// A SwiftUI view used to generate the app icon PNG file.
-///
-/// # Usage
-/// ```swift
-/// try AppIcon.writePNG(to: URL(filePath: "/path/to/AppIcon.png"))
-/// ```
 @MainActor struct AppIcon: View {
     var body: some View {
         MasonryView(size: 600)
             .frame(width: .appIconWidth, height: .appIconHeight)
             .background(Color.appLightGray)
     }
-
-    static func writePNG(to url: URL) throws {
-        let renderer = ImageRenderer(content: AppIcon())
-        renderer.scale = 1 // Fixed 1x scaling
-        renderer.proposedSize = .init(
-            width: .appIconWidth,
-            height: .appIconHeight
-        )
-        let pngData = renderer.uiImage?.pngData()
-        guard let pngData else { throw AppIconError.pngData }
-        try pngData.write(to: url, options: .atomic)
-    }
 }
-
-// MARK: - MasonryView
 
 private struct MasonryView: View {
     var size: CGFloat
 
-    private var columnWidth: CGFloat {
-        size * 0.275
-    }
-
-    private var smallHeight: CGFloat {
-        size * 0.3
-    }
-
-    private var largeHeight: CGFloat {
-        size * 0.6
-    }
+    private var columnWidth: CGFloat { size * 0.275 }
+    private var smallHeight: CGFloat { size * 0.3 }
+    private var largeHeight: CGFloat { size * 0.6 }
 
     var body: some View {
         ZStack {
@@ -114,14 +86,6 @@ private struct ColorView: View {
             )
     }
 }
-
-// MARK: - AppIconError
-
-enum AppIconError: Error {
-    case pngData
-}
-
-// MARK: - CGFloat + AppIcon
 
 private extension CGFloat {
     static let appIconWidth: CGFloat = 1024
