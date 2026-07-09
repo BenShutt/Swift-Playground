@@ -9,6 +9,7 @@ import SwiftUI
 
 // MARK: - ScreenViewController
 
+@MainActor
 protocol ScreenViewController {
     var screenColor: Color { get }
     var screenTitle: LocalizedStringKey { get }
