@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #
-# Compiles and runs SwiftTime.swift with optimisation (-O)
+# Compiles and runs SwiftTime.swift with optimization (-O)
 #
 # Usage:
 # ./run.sh
@@ -20,7 +20,7 @@ bin="${build_dir}/${name}"
 # Remove build output on exit (success or failure)
 trap 'rm -rf -- "${build_dir}"' EXIT
 
-# Compile with optimisation, then run
+# Compile with optimization, then run
 mkdir -p "${build_dir}"
 swiftc -O "${src}" -o "${bin}"
 "${bin}"
