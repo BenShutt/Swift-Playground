@@ -1,11 +1,4 @@
 import Foundation
-import PlaygroundSupport
-
-PlaygroundPage.current.needsIndefiniteExecution = true
-defer {
-    print("Finishing execution")
-    PlaygroundPage.current.finishExecution()
-}
 
 // Check we are on the main queue
 dispatchPrecondition(condition: .onQueue(.main))
