@@ -18,8 +18,7 @@ let package = Package(
     targets: [
         .target(
             name: "FlowLayout",
-            path: "Sources",
-            exclude: ["PreviewView.swift"]
+            path: "Sources"
         ),
         .testTarget(
             name: "FlowLayoutTests",
