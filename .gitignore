@@ -1,19 +1,6 @@
-# --- General ---
-.build/
-.swiftpm/
-
-# --- SwiftPM ---
+# macOS
 .DS_Store
-# /.build
-/Packages
-xcuserdata/
-DerivedData/
-.swiftpm/configuration/registries.json
-.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
-.netrc
 
-# --- VSCode ---
+# Editors
 .vscode/launch.json
-
-# --- Vim ---
 *.swp
