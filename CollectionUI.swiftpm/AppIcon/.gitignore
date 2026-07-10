@@ -1,7 +1,6 @@
 .DS_Store
 /.build
 /Packages
-/AppIcon.png
 xcuserdata/
 DerivedData/
 .swiftpm/configuration/registries.json

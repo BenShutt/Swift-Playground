@@ -14,4 +14,8 @@ This is a separate SwiftPM package since it is macOS only and `CollectionUI` is 
 bash Scripts/app-icon.sh
 ```
 
-Writes `AppIcon.png` into this directory (git-ignored).
+Writes the icon straight into the app's asset catalog at:
+
+```text
+Resources/Assets.xcassets/AppIcon.appiconset/AppIcon.png
+```

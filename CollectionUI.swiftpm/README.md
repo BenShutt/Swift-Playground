@@ -18,7 +18,7 @@ The project is reasonably well documented, but here is a summary of the notable 
 
 Stores a 2D array of columns and their vertically stacked items. When a new item is going to be added, the last element of each column is compared to see which has the smallest `maxY`. The new item is then appended to the shortest column.
 
-###  MasonryBuilder
+### MasonryBuilder
 
 Takes an array of models and computes their frames in the collection view. This structure performances the positional/size calculations.
 
