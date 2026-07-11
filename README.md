@@ -14,14 +14,14 @@ Can be run using:
 swift <Name>.swift
 ```
 
-May contain companion scripts (e.g. `run.sh` for optimization).
+May be grouped with companion scripts (e.g. `run.sh` for optimization).
 
 ### SwiftPM package
 
 A script might not be enough if a project needs (including but not limited to):
 
 - Third-party dependencies
-- Modularization and separation of targets
+- Modularization/separation of targets
 - Build, platform, and Swift settings
 - Swift testing
 - Resources
